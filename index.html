@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Cutiepie 🐼🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff85a1;--soft-pink:#ffd6e0;--peach:#ffb347;--lav:#c9b1ff;--mint:#98f5e1;--yellow:#ffe066;--glass:rgba(255, 255, 255, 0.1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Quicksand',sans-serif;background:#050510;overflow-x:hidden;color:white;min-height:100vh;}
+
+/* ── BACKGROUND ── */
+.stars-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at center, #1a0a2e 0%, #050510 100%);}
+.star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--d) infinite alternate;}
+@keyframes twinkle{from{opacity:.1;transform:scale(0.8);}to{opacity:1;transform:scale(1.2);}}
+
+/* ── NAVIGATION ── */
+#prog-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--pink),var(--peach),var(--lav));z-index:999;transition:width .4s;}
+.nav-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:15px;z-index:200;}
+.ndot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+.ndot.active{background:var(--pink);transform:scale(1.4);box-shadow:0 0 15px var(--pink);}
+
+/* ── GLOBAL UI ── */
+.page{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;z-index:1;}
+.page.active{display:flex;animation:pageIn .8s ease forwards;}
+@keyframes pageIn{from{opacity:0;filter:blur(10px);transform:translateY(30px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+.btn{padding:16px 40px;background:linear-gradient(135deg,var(--pink),var(--peach));color:white;border:none;border-radius:50px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:1.1rem;cursor:pointer;box-shadow:0 10px 30px rgba(255,133,161,.4);transition:all .4s ease;margin-top:25px;}
+.btn:hover{transform:translateY(-5px) scale(1.05);}
+
+/* ── HERO ── */
+.panda-hero{font-size:6rem;filter:drop-shadow(0 0 30px var(--pink));animation:bounce 3s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)}}
+.hero-title{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,8vw,4.5rem);text-align:center;background:linear-gradient(to right, #ffd6e0, #ff85a1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:20px 0;}
+
+/* ── PHOTO GRID ── */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:25px;max-width:1000px;width:100%;margin:40px 0;padding:20px;}
+.photo-card{background:white;padding:10px 10px 15px;border-radius:5px;box-shadow:0 15px 45px rgba(0,0,0,0.4);transform:rotate(var(--rot));transition:all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);position:relative;}
+.photo-card:hover{transform:rotate(0deg) scale(1.2) translateY(-15px) !important;z-index:100;}
+.photo-ph{width:100%;aspect-ratio:1;background:#f0f0f0;overflow:hidden;border-radius:2px;}
+.photo-ph img{width:100%;height:100%;object-fit:cover;}
+.photo-tape{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:50px;height:25px;background:rgba(255,255,255,0.3);backdrop-filter:blur(2px);border-radius:2px;}
+
+/* ── SCENES ── */
+.scene-card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.2);border-radius:35px;padding:40px;max-width:600px;width:100%;text-align:center;}
+.scene-card h2{font-family:'Dancing Script',cursive;font-size:2.5rem;color:var(--soft-pink);margin-bottom:15px;}
+.scene-card p{font-family:'Caveat',cursive;font-size:1.4rem;line-height:1.6;}
+
+.chat-container{width:100%;max-width:350px;margin:20px auto;text-align:left;}
+.msg-bubble{background:var(--pink);padding:12px 20px;border-radius:20px 20px 5px 20px;margin:10px 0;font-family:'Caveat',cursive;font-size:1.3rem;animation:pop 0.5s forwards;}
+.msg-bubble.reply{background:rgba(255,255,255,0.1);border-radius:20px 20px 20px 5px;margin-left:auto;text-align:right;}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+
+.cam-flash{position:fixed;inset:0;background:white;z-index:900;opacity:0;pointer-events:none;}
+.flash-active{animation:flashAnim 0.6s ease-out;}
+@keyframes flashAnim{0%{opacity:0} 20%{opacity:1} 100%{opacity:0}}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+<div class="nav-dots" id="navDots"></div>
+<div class="stars-bg" id="starsBg"></div>
+<div class="cam-flash" id="camFlash"></div>
+
+<div class="page active" id="p0">
+  <div class="panda-hero">🐼</div>
+  <h1 class="hero-title">Hey Cutiepie,</h1>
+  <p style="font-family:'Caveat',cursive;font-size:1.5rem;color:var(--lav);">Something special happened 25 years ago today...</p>
+  <button class="btn" onclick="goTo(1)">Step Inside ✨</button>
+</div>
+
+<div class="page" id="p1">
+  <div class="scene-card">
+    <h2>The 25th Candle 🕯️</h2>
+    <p>Close your eyes, think of something beautiful, and light them up.</p>
+    <div style="font-size:5rem;margin:20px 0;">🎂</div>
+    <button class="btn" onclick="goTo(2)">Make a Wish ✨</button>
+  </div>
+</div>
+
+<div class="page" id="p2">
+  <h2 style="font-family:'Dancing Script',cursive;font-size:3rem;color:var(--pink);">Sweet Moments</h2>
+  <div class="photo-grid" id="photoGrid"></div>
+  <button class="btn" onclick="goTo(3)">Read My Message 💌</button>
+</div>
+
+<div class="page" id="p3">
+  <div class="scene-card" style="background:white;color:#333;">
+    <h2 style="color:var(--pink)">For You 🐼</h2>
+    <div style="font-family:'Caveat',cursive;font-size:1.4rem;text-align:left;line-height:1.6;">
+        My dearest Cutiepie,<br><br>
+        That evening at the amphitheatre changed my world. Seeing you sit there, I had no idea that clicking one photo would lead to a lifetime of memories. You aren't just a part of my story; you are the reason I love telling it.<br><br>
+        Happy 25th, my love.
+    </div>
+    <button class="btn" onclick="goTo(4)">Our Story →</button>
+  </div>
+</div>
+
+<div class="page" id="p4">
+  <div class="scene-card">
+    <div style="font-size:4rem;margin-bottom:10px;">🎭</div>
+    <h2>The First Glance</h2>
+    <p>The amphitheatre was buzzing, but my lens somehow only found you. A simple request: "Can you click my photo?" and my heart was gone.</p>
+    <button class="btn" onclick="doFlash()">📸 Take the Shot</button>
+  </div>
+</div>
+
+<div class="page" id="p5">
+  <div class="scene-card">
+    <div style="font-size:4rem;margin-bottom:10px;">🔍</div>
+    <h2>The Search</h2>
+    <p>Days of scrolling and hoping. I didn't know your name, but I couldn't forget your smile.</p>
+    <button class="btn" onclick="goTo(6)">One day...</button>
+  </div>
+</div>
+
+<div class="page" id="p6">
+  <div class="scene-card">
+    <div style="font-size:4rem;margin-bottom:10px;">✨</div>
+    <h2>Found You</h2>
+    <div class="chat-container">
+        <div class="msg-bubble">Hi, mujhe pahchana? 📸</div>
+        <div class="msg-bubble reply">Haha yes, I remember! 😊</div>
+    </div>
+    <button class="btn" onclick="goTo(0)">Begin Again ❤️</button>
+  </div>
+</div>
+
+<script>
+const PAGES = ['p0','p1','p2','p3','p4','p5','p6'];
+let current = 0;
+
+// STARS
+const starContainer = document.getElementById('starsBg');
+for(let i=0; i<150; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 3 + 'px';
+    star.style.width = size; star.style.height = size;
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.setProperty('--d', (Math.random() * 2 + 1) + 's');
+    starContainer.appendChild(star);
+}
+
+function goTo(n) {
+    document.getElementById(PAGES[current]).classList.remove('active');
+    current = n;
+    document.getElementById(PAGES[n]).classList.add('active');
+    updateNav();
+}
+
+function updateNav() {
+    const dots = document.querySelectorAll('.ndot');
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    document.getElementById('prog-bar').style.width = (current / (PAGES.length - 1) * 100) + '%';
+}
+
+const navDots = document.getElementById('navDots');
+PAGES.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'ndot' + (i===0?' active':'');
+    dot.onclick = () => goTo(i);
+    navDots.appendChild(dot);
+});
+
+// PHOTO GRID GENERATOR
+const grid = document.getElementById('photoGrid');
+const rotations = [-4, 3, -2, 5, -3, 2, -5, 4, -2, 3, -4, 2];
+
+// REPLACE THESE WITH YOUR ACTUAL IMAGE LINKS
+const myImages = [
+  'images/pic1.jpg', 'images/pic2.jpg', 'images/pic3.jpg', 
+  'images/pic4.jpg', 'images/pic5.jpg', 'images/pic6.jpg',
+  'images/pic7.jpg', 'images/pic8.jpg', 'images/pic9.jpg',
+  'images/pic10.jpg', 'images/pic11.jpg', 'images/pic12.jpg'
+];
+
+for(let i=0; i<12; i++) {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.style.setProperty('--rot', rotations[i] + 'deg');
+    card.innerHTML = `
+        <div class="photo-tape"></div>
+        <div class="photo-ph">
+            <img src="${myImages[i]}" onerror="this.src='https://via.placeholder.com/150?text=Wait+for+it...'">
+        </div>
+    `;
+    grid.appendChild(card);
+}
+
+function doFlash() {
+    document.getElementById('camFlash').classList.add('flash-active');
+    setTimeout(() => {
+        document.getElementById('camFlash').classList.remove('flash-active');
+        goTo(5);
+    }, 600);
+}
+</script>
+</body>
+</html>
